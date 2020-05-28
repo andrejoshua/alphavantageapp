@@ -30,7 +30,6 @@ There are few additional points i will explain given the picture:
 
 * [Kotlin 1.3.72](https://kotlinlang.org/docs/reference/android-overview.html)
 * [Kotlin Coroutines](https://kotlinlang.org/docs/reference/coroutines/coroutines-guide.html)
-* 
 * [Koin DI](https://start.insert-koin.io/#/quickstart/kotlin)
 * [AndroidX Jetpack](https://developer.android.com/jetpack)
 	* [Navigation](https://developer.android.com/guide/navigation/navigation-getting-started) + [SafeArgs](https://developer.android.com/guide/navigation/navigation-pass-data)
