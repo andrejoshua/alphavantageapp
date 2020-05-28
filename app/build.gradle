@@ -1,0 +1,131 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+    defaultConfig {
+        applicationId "com.alphavantage.app"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary true
+        testInstrumentationRunner "com.alphavantage.app.AlphaVantageAppRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles 'proguard-rules.pro'
+        }
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = rootProject.jdkVersion
+        targetCompatibility = rootProject.jdkVersion
+    }
+    kotlinOptions {
+        jvmTarget = rootProject.jdkVersionString
+    }
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.support') {
+                if (!requested.name.startsWith("multidex")) {
+                    details.useVersion '29.0.2'
+                }
+            }
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //// START: Main Packages
+
+    // Androidx View
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "androidx.legacy:legacy-support-v4:$legacyVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // AndroidX Lifecycle
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+
+    // Androidx Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigationVersion"
+
+    // Androidx Lifecycle ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+//    implementation "androidx.preference:preference-ktx:$preferenceVersion"
+
+    // Core packages
+    implementation "androidx.multidex:multidex:$multidexVersion"
+
+    // Koin AndroidX ViewModel features
+    implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
+
+    //// END
+
+    //// START: Testing Packages
+
+    // Arch Test
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    androidTestImplementation "androidx.navigation:navigation-testing:$navigationVersion"
+
+    // Coroutines
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+
+    // JUnit Test & Rules
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test:core:$testVersion"
+    androidTestImplementation "androidx.test:runner:$testVersion"
+    androidTestImplementation "androidx.test:rules:$testVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
+
+    // JUnit Truth Assertions
+    androidTestImplementation "androidx.test.ext:truth:$testVersion"
+    androidTestImplementation 'com.google.truth:truth:1.0.1'
+
+    // Mock Test
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation "org.mockito:mockito-inline:$mockitoVersion"
+    androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
+    androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
+
+    // Instrumentation Tests
+    androidTestImplementation "org.hamcrest:hamcrest-library:2.2"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.uiautomator:uiautomator:2.2.0"
+
+    // Koin
+    testImplementation "org.koin:koin-test:$koinVersion"
+
+    //// END
+
+    implementation project(path: ':data')
+    implementation project(path: ':domain')
+}

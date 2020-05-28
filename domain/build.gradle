@@ -1,0 +1,95 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = rootProject.jdkVersion
+        targetCompatibility = rootProject.jdkVersion
+    }
+    kotlinOptions {
+        jvmTarget = rootProject.jdkVersionString
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //// START: Main Packages
+
+    // Timber logging
+    api "com.jakewharton.timber:timber:$timberVersion"
+
+    // Core packages
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    api "androidx.core:core-ktx:$coreVersion"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+
+    // Koin
+    api "org.koin:koin-core:$koinVersion"
+    // Koin extended & experimental features
+    api "org.koin:koin-core-ext:$koinVersion"
+    api "org.koin:koin-android:$koinVersion"
+    // Koin AndroidX Scope features
+    api "org.koin:koin-androidx-scope:$koinVersion"
+    // Koin AndroidX Experimental features
+    api "org.koin:koin-androidx-ext:$koinVersion"
+
+    // Work
+    api "androidx.work:work-runtime-ktx:$workVersion"
+
+    // Misc
+    api "com.github.debop:koda-time:$kodaVersion"
+
+    //// END
+
+    //// START: Testing Packages
+
+    // Coroutines
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+
+    // Mockito
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation "org.mockito:mockito-inline:$mockitoVersion"
+    androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
+    androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
+
+    // Core package test
+    androidTestImplementation "androidx.test:core:$testVersion"
+
+    // Assertions
+    androidTestImplementation "androidx.test.ext:truth:$testVersion"
+    androidTestImplementation 'com.google.truth:truth:1.0.1'
+
+    // Work
+    androidTestImplementation "androidx.work:work-testing:$workVersion"
+
+    // Koin
+    testImplementation "org.koin:koin-test:$koinVersion"
+
+    //// END
+}

@@ -1,0 +1,84 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:3918141244167131469",
+      "lastPropertyId": "7:7778658654100319491",
+      "name": "ExchangeRateEntity",
+      "properties": [
+        {
+          "id": "1:8262073396312791935",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5879011472985659957",
+          "name": "currency_from",
+          "type": 9
+        },
+        {
+          "id": "3:9075013936474619339",
+          "name": "currency_to",
+          "type": 9
+        },
+        {
+          "id": "4:8877802809992401170",
+          "name": "exchange_rate",
+          "type": 8,
+          "flags": 4
+        },
+        {
+          "id": "5:8776884812969299525",
+          "name": "bid_price",
+          "type": 8,
+          "flags": 4
+        },
+        {
+          "id": "6:9081722459431420198",
+          "name": "ask_price",
+          "type": 8,
+          "flags": 4
+        },
+        {
+          "id": "7:7778658654100319491",
+          "name": "last_refreshed",
+          "type": 10
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "3:9190816060364669250",
+  "lastIndexId": "1:4163700723983843773",
+  "lastRelationId": "1:8101504394573817285",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [
+    9024154673184736027,
+    9190816060364669250
+  ],
+  "retiredIndexUids": [
+    4163700723983843773
+  ],
+  "retiredPropertyUids": [
+    774996788066509846,
+    3504356408961786926,
+    2695032260724193756,
+    4374866482300564368,
+    25344744143788323,
+    4540597842183450157,
+    2588321683370341240,
+    4506713798185109743,
+    6098036102317685158,
+    1142171342354075092,
+    1567819540072561380
+  ],
+  "retiredRelationUids": [
+    8101504394573817285
+  ],
+  "version": 1
+}

@@ -1,0 +1,89 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'io.objectbox'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        buildConfigField "String", "API_BASE_URL", "\"https://www.alphavantage.co/\""
+        buildConfigField "String", "API_TOKEN", token
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = rootProject.jdkVersion
+        targetCompatibility = rootProject.jdkVersion
+    }
+    kotlinOptions {
+        jvmTarget = rootProject.jdkVersionString
+    }
+    kapt {
+        arguments {
+            arg("objectbox.debug", true)
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //// START: Main packages
+
+    // Networking
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.7.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.7.2'
+
+    // LocalDB
+    kapt "io.objectbox:objectbox-processor:$objectboxVersion"
+    implementation "io.objectbox:objectbox-android:$objectboxVersion"
+    implementation "io.objectbox:objectbox-kotlin:$objectboxVersion"
+
+    //// END
+
+    //// START: Testing packages
+
+    // Coroutines
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+
+    // Junit
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
+
+    // Mockito
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation "org.mockito:mockito-inline:$mockitoVersion"
+    androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
+    androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
+
+    // Mock web server
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.7.2'
+
+    // Koin
+    testImplementation "org.koin:koin-test:$koinVersion"
+
+    //// END
+
+    implementation project(path: ':domain')
+}
