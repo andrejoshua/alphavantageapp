@@ -1,7 +1,7 @@
 
 # AlphaVantage App
 
-**AlphaVantage** is just an example of stock-market Android application with Clean Architecture approach, integrated with [AlphaVantage API](https://www.alphavantage.co/). This application is still being maintained to keep updated with current technology standards.
+**AlphaVantage** is just an example of forex (currency) calculator Android application with Clean Architecture approach, integrated with [AlphaVantage API](https://www.alphavantage.co/). This application is still being maintained to keep updated with current technology standards.
 
 ## Features (Pages)
 
