@@ -4,15 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import com.alphavantage.app.R
 import com.alphavantage.app.databinding.CurrenciesFragmentBinding
 import com.alphavantage.app.domain.model.Result
-import com.alphavantage.app.domain.widget.EventObserver
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,16 +22,7 @@ class CurrenciesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.currencies_fragment,
-            container,
-            false
-        ) as CurrenciesFragmentBinding
-
-        binding.viewModel = viewModel
-
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding = CurrenciesFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 

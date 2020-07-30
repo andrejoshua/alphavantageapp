@@ -11,15 +11,15 @@ buildscript {
         jdkVersion = 1.8
         jdkVersionString = '1.8'
 
-        androidGradleVersion = '3.6.3'
+        androidGradleVersion = '4.0.1'
 
         kotlinVersion = '1.3.72'
-        coreVersion = '1.3.0'
+        coreVersion = '1.3.1'
         multidexVersion = '2.0.1'
         objectboxVersion = '2.4.1'
         lifecycleVersion = '2.2.0'
-        coroutinesVersion = '1.3.2'
-        navigationVersion = '2.3.0-alpha06'
+        coroutinesVersion = '1.3.4'
+        navigationVersion = '2.3.0'
         koinVersion = '2.0.1'
 
         appCompatVersion = '1.1.0'
@@ -27,7 +27,7 @@ buildscript {
         legacyVersion = '1.0.0'
         materialVersion = '1.1.0'
         constraintLayoutVersion = '1.1.3'
-        workVersion = '2.3.4'
+        workVersion = '2.4.0'
         kodaVersion = '2.0.0'
         timberVersion = '4.7.1'
 

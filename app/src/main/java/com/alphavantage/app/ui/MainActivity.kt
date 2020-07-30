@@ -4,14 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.navigation.NavArgsLazy
 import androidx.navigation.fragment.findNavController
 import com.alphavantage.app.R
 import com.alphavantage.app.nav.NavManager
-import com.alphavantage.app.ui.currencies.CurrenciesFragment
-import com.alphavantage.app.ui.currencies.CurrenciesFragmentArgs
 import com.alphavantage.app.ui.exchangerate.ExchangeRateFragment
-import com.alphavantage.app.ui.exchangerate.ExchangeRateFragmentArgs
 import com.alphavantage.app.util.getNavArgsInstance
 import kotlinx.android.synthetic.main.main_activity.*
 import org.koin.android.ext.android.inject

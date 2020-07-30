@@ -4,17 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import com.alphavantage.app.R
+import androidx.lifecycle.Observer
+import androidx.lifecycle.map
 import com.alphavantage.app.databinding.ExchangeRateFragmentBinding
-import com.alphavantage.app.domain.widget.EventObserver
 import com.alphavantage.app.ui.common.setOnSafeClickListener
-import com.alphavantage.app.util.getNavArgsInstance
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ExchangeRateFragment : Fragment() {
 
@@ -32,14 +28,11 @@ class ExchangeRateFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(
+        binding = ExchangeRateFragmentBinding.inflate(
             inflater,
-            R.layout.exchange_rate_fragment,
             container,
             false
         )
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
@@ -47,6 +40,24 @@ class ExchangeRateFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.initValue()
+
+        viewModel.fromCurrency.map { it.toString() }.observe(viewLifecycleOwner, Observer {
+            binding.fromEditText.text = it
+        })
+        viewModel.toCurrency.map { it.toString() }.observe(viewLifecycleOwner, Observer {
+            binding.toEditText.text = it
+        })
+        viewModel.output.map { it.toString() }.observe(viewLifecycleOwner, Observer {
+            binding.priceOutputText.text = it
+        })
+
+        binding.priceInputEdit.doOnTextChanged { _, _, _, _ ->
+            viewModel.input.value = binding.priceInputEdit.text.toString()
+        }
+
+        binding.calculateButton.setOnClickListener {
+            viewModel.calculate()
+        }
 
         binding.fromCurrencyLayout.setOnSafeClickListener {
             viewModel.setGoToFromCurrenciesAction()

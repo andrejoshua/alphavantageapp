@@ -1,12 +1,12 @@
 package com.alphavantage.app.ui.common
 
 import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import androidx.viewbinding.ViewBinding
 
-abstract class DataBoundListAdapter<T, V : ViewDataBinding>(diffCallback: DiffUtil.ItemCallback<T>) :
+abstract class DataBoundListAdapter<T, V : ViewBinding>(diffCallback: DiffUtil.ItemCallback<T>) :
     ListAdapter<T, DataBoundViewHolder<V>>(AsyncDifferConfig.Builder<T>(diffCallback).build()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBoundViewHolder<V> {
@@ -19,7 +19,6 @@ abstract class DataBoundListAdapter<T, V : ViewDataBinding>(diffCallback: DiffUt
     override fun onBindViewHolder(holder: DataBoundViewHolder<V>, position: Int) {
         if (position < itemCount) {
             bind(holder.binding, getItem(position))
-            holder.binding.executePendingBindings()
         }
     }
 
